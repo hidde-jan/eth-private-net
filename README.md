@@ -26,6 +26,12 @@ Since we're bootstrapping our own private chain, we'll need a [genesis block](ht
 → ./eth-private-net init
 ```
 
+**Note:** We can precompute the DAG, meaning the nodes can start mining faster, by running:
+
+```
+→ ./eth-private-net makedag
+```
+
 **Note:** Tearing down your private network and resetting all account balances is easy. Just run:
 
 ```
@@ -39,10 +45,15 @@ Nodes for `alice`, `bob`, or `lily` can be started easily with the `start` actio
 ```
 → ./eth-private-net start alice
 Starting node for alice on port: 40301, RPC port: 8101. Console logs sent to ./alice/console.log
-Welcome to the Geth JavaScript console!
 ```
 
-This starts a running Ethereum node, loads whatever identity you specified on the command line, and starts a console where you can begin interacting with your private net. The console itself is a Javascript REPL with all of the commands you need to begin working with Ethereum preloaded. You can check out all of the available commands [here](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#management-api-reference).
+This starts a running Ethereum node, loads whatever identity you specified on the command line, and starts the miner. You can begin interacting with your private net by attaching to the rpc of this node:
+
+```
+→ geth attach http://localhost:8101 # or :8102, :8103
+```
+
+The console itself is a Javascript REPL with all of the commands you need to begin working with Ethereum preloaded. You can check out all of the available commands [here](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#management-api-reference).
 
 The first thing you can do is check Alice's balance, which should show exactly 1e+18 Wei (1 Ether).
 
