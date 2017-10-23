@@ -23,10 +23,11 @@ Usage:
 
 Commands:
     init       Initialize private network from genesis block in genesis.json
-    makedag    Create DAG such that mining can start sooner.
+    makedag    Create DAG such that mining can start sooner
     clean      Destroy all blockchain history, resetting to pristine state
     start      Start a running ethereum node on the network (example: 'start alice')
     connect    Connect two running nodes as peers (example: 'connect alice bob')
+    attach     Attach to the RPC console of a running node
     help       Print this help message
 
 Author:
@@ -88,6 +89,12 @@ case $CMD in
     geth --mine --datadir=./$IDENTITY --port=$PORT --rpc --rpcport=$RPC_PORT --rpcapi="web3,eth,net,personal,admin,miner,debug,rpc" $FLAGS $DEV_FLAGS
     ;;
 
+  attach)
+    IDENTITY=$2
+
+    geth attach ./$IDENTITY/geth.ipc
+    ;;
+    
   connect)
     IDENTITY1=$2
     IDENTITY2=$3
