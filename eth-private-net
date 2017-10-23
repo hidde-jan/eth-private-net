@@ -23,7 +23,7 @@ Usage:
 
 Commands:
     init       Initialize private network from genesis block in genesis.json
-    makedag    Create DAG such that mining can start sooner
+    makedag    Create DAG such that mining can start sooner (example: 'makedag 360000)
     clean      Destroy all blockchain history, resetting to pristine state
     start      Start a running ethereum node on the network (example: 'start alice')
     connect    Connect two running nodes as peers (example: 'connect alice bob')
@@ -50,7 +50,7 @@ case $CMD in
 
   makedag)
     echo "Creating DAG for faster mining."
-    geth makedag 36000 ~/.ethash
+    geth makedag $2 ~/.ethash
     ;;
 
   clean)
@@ -92,7 +92,7 @@ case $CMD in
   attach)
     IDENTITY=$2
 
-    geth attach ./$IDENTITY/geth.ipc
+    geth attach --preload=identities.js ./$IDENTITY/geth.ipc
     ;;
     
   connect)
